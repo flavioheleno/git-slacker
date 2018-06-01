@@ -1,0 +1,5 @@
+*.log
+vendor/
+*.sublime-*
+.env
+.DS_Store

@@ -1,0 +1,48 @@
+{
+    "name": "flavioheleno/git-slacker",
+    "description": "GitHub-Based Project Management for lazy people ;-)",
+    "license": "mit",
+    "type": "project",
+    "keywords": ["git", "github", "project", "planning", "slack", "bot"],
+    "authors": [
+        {
+            "name": "Flavio Heleno",
+            "email": "flaviohbatista@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Test\\": "test"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "league/flysystem": "^1.0",
+        "slim/slim": "^3.9",
+        "league/event": "^2.1",
+        "league/tactician": "^1.0",
+        "league/tactician-container": "^2.0",
+        "league/tactician-logger": "^0.10.0",
+        "monolog/monolog": "^1.23",
+        "refinery29/league-lazy-event": "^0.3.0",
+        "vlucas/phpdotenv": "^2.4",
+        "botman/botman": "^2.3",
+        "botman/driver-slack": "^2.1",
+        "slim/http-cache": "^0.4.0",
+        "respect/validation": "^1.1",
+        "filp/whoops": "^2.1",
+        "knplabs/github-api": "^2.8",
+        "php-http/guzzle6-adapter": "^1.1",
+        "nilportugues/repository": "^3.1",
+        "nilportugues/sql-repository": "^1.1",
+        "botman/driver-telegram": "^1.5",
+        "league/oauth2-client": "^2.3",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-redis": "*"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "*"
+    }
+}
