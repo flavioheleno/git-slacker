@@ -65,6 +65,10 @@ if (! isset($app)) {
     die('$app is not set!');
 }
 
+if (! defined('__ROOT__')) {
+  define('__ROOT__', __DIR__ . '/..');
+}
+
 $container = $app->getContainer();
 
 // Slim Error Handling

@@ -5,6 +5,10 @@ if (! isset($app)) {
     die('$app is not set!');
 }
 
+if (! defined('__ROOT__')) {
+  define('__ROOT__', __DIR__ . '/..');
+}
+
 /**
  * This file is responsible for initializing the event emitter
  * variable that will be inject through the application.
