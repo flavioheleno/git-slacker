@@ -521,5 +521,23 @@ $container['mapper'] = function (ContainerInterface $container) : Helper\Mapper 
 };
 
 $container['pdo'] = function (ContainerInterface $container) : PDO {
-  return new PDO(Helper\Env::asString('DATABASE_URL', ''));
+  $dsn = parse_url(Helper\Env::asString('DATABASE_URL', ''));
+  $pdo = new PDO(
+    sprintf(
+      'pgsql:host=%s;port=%s;dbname=%s',
+      $dsn['host'],
+      $dsn['port'],
+      ltrim($dsn['path'], '/')
+    ),
+    $dsn['user'],
+    $dsn['pass'] ?? '',
+    [
+      PDO::ATTR_ERRMODE          => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_EMULATE_PREPARES => false,
+      PDO::ATTR_TIMEOUT          => 5,
+      PDO::ATTR_PERSISTENT       => false
+    ]
+  );
+
+  return $pdo;
 };
