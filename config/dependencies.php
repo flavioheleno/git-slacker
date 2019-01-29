@@ -515,3 +515,7 @@ $container['urls'] = function (ContainerInterface $container) : array {
 $container['mapper'] = function (ContainerInterface $container) : Helper\Mapper {
   return new Helper\Mapper();
 };
+
+$container['pdo'] = function (ContainerInterface $container) : PDO {
+  return new PDO(Helper\Env::asString('DATABASE_URL', ''));
+};

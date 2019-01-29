@@ -40,7 +40,8 @@
         "league/oauth2-client": "^2.3",
         "ext-gd": "*",
         "ext-mbstring": "*",
-        "ext-redis": "*"
+        "ext-redis": "*",
+        "robmorgan/phinx": "^0.10.6"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

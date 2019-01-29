@@ -129,14 +129,18 @@ class GitHub implements HandlerInterface {
         'Log\\Warning',
         'GitHub:WebHook->Callback: Invalid request signature',
         [
-          'signature' => $signature,
+          'signature'        => $signature,
           'requestSignature' => $command->requestSignature,
-          'payload' => $command->payload
+          'payload'          => $command->payload
         ]
       );
 
       throw new AppException('Invalid request signature');
     }
+
+/*
+
+XXX: DISABLED FOR NOW, MUST REVIEW LATER
 
     switch ($command->eventName) {
       case 'pull_request':
@@ -244,6 +248,7 @@ class GitHub implements HandlerInterface {
 
         break;
     }
+*/
 
     $event = $this->eventFactory->create(
       'WebHook\\Received',

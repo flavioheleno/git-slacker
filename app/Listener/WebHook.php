@@ -15,6 +15,11 @@ class WebHook extends AbstractListener {
    * @var \Monolog\Logger
    */
   private $logger;
+  /**
+   *
+   * @var \PDO
+   */
+  private $pdo;
 
   /**
    * {@inheritdoc}
@@ -23,7 +28,7 @@ class WebHook extends AbstractListener {
     $container[self::class] = function (ContainerInterface $container) : ListenerInterface {
       $log = $container->get('log');
 
-      return new \App\Listener\WebHook($log('WebHook'));
+      return new \App\Listener\WebHook($log('WebHook'), $container->get('pdo'));
     };
   }
 
@@ -31,11 +36,13 @@ class WebHook extends AbstractListener {
    * Class constructor.
    *
    * @param \Monolog\Logger $logger
+   * @param \PDO $pdo
    *
    * @return void
    */
-  public function __construct(Logger $logger) {
+  public function __construct(Logger $logger, \PDO $pdo) {
     $this->logger = $logger;
+    $this->pdo    = $pdo;
   }
 
   /**
@@ -53,6 +60,15 @@ class WebHook extends AbstractListener {
           'provider' => $event->providerName,
           'trigger'  => $event->trigger,
           'payload'  => $event->payload
+        ]
+      );
+
+      $stmt = $this->pdo->prepare('INSERT INTO "webhook_storage" ("event_name", "provider", "payload") VALUES (?, ?, ?)');
+      $stmt->execute(
+        [
+          $event->trigger,
+          $event->providerName,
+          json_encode($event->payload)
         ]
       );
     }
