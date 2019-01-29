@@ -7,6 +7,10 @@ if (! defined('__VERSION__')) {
   define('__VERSION__', Env::asString('GIT_SLACKER_VERSION', '1.0'));
 }
 
+if (! defined('__ROOT__')) {
+  define('__ROOT__', __DIR__ . '/..');
+}
+
 $appSettings = [
   'debug'                             => Env::asBool('SLIM_DEBUG', false),
   'displayErrorDetails'               => Env::asBool('SLIM_DEBUG', false),
@@ -23,8 +27,8 @@ $appSettings = [
     'path' => Env::asString(
       'SLIM_LOG_FILE',
       sprintf(
-        '%s/../log/application.log',
-        __DIR__
+        '%s/log/application.log',
+        __ROOT__
       )
     ),
     'level' => Env::asBool('SLIM_DEBUG', false) ? Monolog\Logger::DEBUG : Monolog\Logger::INFO
